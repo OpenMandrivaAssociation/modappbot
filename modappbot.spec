@@ -13,7 +13,6 @@ Url:		http://www.frmug.org/usenet/mod/
 Source:		http://www.frmug.org/usenet/mod/%{name}-%{version}.tar.bz2
 Patch:		modappbot.patch
 BuildArch:	noarch
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 A robot written in perl to moderate Usenet groups
