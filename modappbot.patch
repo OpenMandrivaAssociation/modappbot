@@ -1,0 +1,92 @@
+*** modappbot	1998-09-16 22:22:01.000000000 +0200
+--- modappbot.new	2005-03-27 21:11:47.225638143 +0200
+***************
+*** 1,4 ****
+! #!/usr/local/bin/perl -w
+  #
+  ##########################################################################
+  #
+--- 1,4 ----
+! #!/usr/bin/perl -w
+  #
+  ##########################################################################
+  #
+***************
+*** 57,63 ****
+  ##########################################################################
+  
+  # Location of the configuration file
+! my $configfile="/home/modappd/etc/modappbot.conf";
+  
+  #######################################################
+  ###### THERE'S NOTHING TO CHANGE BELOW THIS LINE ######
+--- 57,63 ----
+  ##########################################################################
+  
+  # Location of the configuration file
+! my $configfile="/etc/modappbot/modappbot.conf";
+  
+  #######################################################
+  ###### THERE'S NOTHING TO CHANGE BELOW THIS LINE ######
+***************
+*** 80,86 ****
+  use Sys::Hostname;
+  
+  # Additional modules
+- use Mail::Internet;
+  use Mail::Header;
+  use Mail::Address;
+  use Mail::Folder::Mbox;
+--- 80,85 ----
+***************
+*** 100,106 ****
+              'mailcmd'=> '/usr/sbin/sendmail',
+              'mailopts' => '-oem -t -f nobody',
+              'newscmd' => '/usr/local/bin/rnews',
+!             'newsopts' => '-h localhost -v -S NNTPSERVER',
+              'from' => 'modappbot (Modappbot)',
+              'nntpserver' => 'localhost',
+              'moderators' => 'moderators.isc.org',
+--- 99,106 ----
+              'mailcmd'=> '/usr/sbin/sendmail',
+              'mailopts' => '-oem -t -f nobody',
+              'newscmd' => '/usr/local/bin/rnews',
+! # before INN 2.2            'newsopts' => '-h localhost -v -S NNTPSERVER',
+!             'newsopts' => '-h localhost -v',
+              'from' => 'modappbot (Modappbot)',
+              'nntpserver' => 'localhost',
+              'moderators' => 'moderators.isc.org',
+***************
+*** 198,204 ****
+  $SIG{'KILL'}= \&modend;
+  $SIG{'BUS'}= \&modend;
+  $SIG{'SEGV'}= \&modend;
+! $SIG{'SYS'}= \&modend;
+  $SIG{'PIPE'}= \&plumber;
+  $SIG{'ALRM'}= \&modend;
+  $SIG{'TERM'}= \&modend;
+--- 198,204 ----
+  $SIG{'KILL'}= \&modend;
+  $SIG{'BUS'}= \&modend;
+  $SIG{'SEGV'}= \&modend;
+! $SIG{'SYS'}= \&modend; #if (not ($^O eq "linux"));
+  $SIG{'PIPE'}= \&plumber;
+  $SIG{'ALRM'}= \&modend;
+  $SIG{'TERM'}= \&modend;
+***************
+*** 863,869 ****
+    my @error=();
+  
+    # No mail commands
+!   if (!defined @mailbody) {
+      mlog(2,"(modappmail) No mail body");
+      push @error,"No commands in mail body";
+    }
+--- 863,869 ----
+    my @error=();
+  
+    # No mail commands
+!   if (!(@mailbody)) {
+      mlog(2,"(modappmail) No mail body");
+      push @error,"No commands in mail body";
+    }
