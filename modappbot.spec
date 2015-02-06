@@ -1,6 +1,6 @@
 %define name	modappbot
 %define version 0.4.6
-%define release 8
+%define release 9
 
 Name:		%{name}
 Version:	%{version}
