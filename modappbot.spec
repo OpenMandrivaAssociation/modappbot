@@ -9,7 +9,7 @@ Summary:	A robot written in perl to moderate Usenet groups
 Summary(fr):	Robot-modérateur écrit en Perl pour modérer des groupes de discussion Usenet
 License:	Artistic
 Group:		Networking/News
-Url:		http://www.frmug.org/usenet/mod/
+Url:		https://www.frmug.org/usenet/mod/
 Source:		http://www.frmug.org/usenet/mod/%{name}-%{version}.tar.bz2
 Patch:		modappbot.patch
 BuildArch:	noarch
